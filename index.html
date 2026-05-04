@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trusty - Privacy-first Local Voice Assistant</title>
+    <meta name="description" content="Privacy-first local voice assistant for Raspberry Pi & Mac powered by Gemma 4.">
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        navy: {
+                            800: '#0f172a',
+                            900: '#0b1120',
+                        },
+                        teal: {
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .gradient-text {
+            background: linear-gradient(to right, #2dd4bf, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-navy-900 text-slate-300 font-sans antialiased selection:bg-teal-500 selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-panel border-b-0 border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded bg-teal-500 flex items-center justify-center text-white font-bold text-xl">
+                        T
+                    </div>
+                    <span class="text-white font-bold text-xl tracking-tight">Trusty</span>
+                </div>
+                <div>
+                    <a href="https://github.com/Barqawiz/Trusty" target="_blank" rel="noopener noreferrer" class="text-slate-300 hover:text-white transition-colors flex items-center gap-2 text-sm font-medium">
+                        <i class="fa-brands fa-github text-lg"></i>
+                        <span class="hidden sm:inline">Star on GitHub</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
+        <!-- Background Glow -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-full opacity-20 pointer-events-none">
+            <div class="absolute top-20 left-1/2 -translate-x-1/2 w-96 h-96 bg-teal-500 rounded-full mix-blend-screen filter blur-[128px]"></div>
+            <div class="absolute top-40 left-1/4 w-72 h-72 bg-blue-500 rounded-full mix-blend-screen filter blur-[128px]"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 tracking-tight">
+                    Meet <span class="gradient-text">Trusty</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-slate-300 mb-8 font-light">
+                    Privacy-first local voice assistant for Raspberry Pi & Mac.
+                </p>
+                
+                <div class="flex items-center justify-center gap-6 mb-10 text-slate-400">
+                    <div class="flex items-center gap-2" title="Apple Mac">
+                        <i class="fa-brands fa-apple text-2xl"></i>
+                        <span class="text-sm font-medium">macOS</span>
+                    </div>
+                    <div class="w-1 h-1 rounded-full bg-slate-600"></div>
+                    <div class="flex items-center gap-2" title="Raspberry Pi">
+                        <i class="fa-brands fa-raspberry-pi text-2xl"></i>
+                        <span class="text-sm font-medium">Raspberry Pi</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="https://github.com/Barqawiz/Trusty" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-teal-500 hover:bg-teal-400 text-navy-900 font-semibold transition-all shadow-[0_0_20px_rgba(45,212,191,0.3)] hover:shadow-[0_0_30px_rgba(45,212,191,0.5)] flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-github"></i>
+                        View on GitHub
+                    </a>
+                    <a href="#demo" class="w-full sm:w-auto px-8 py-3.5 rounded-full glass-panel hover:bg-slate-800 text-white font-medium transition-all flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-play text-teal-400"></i>
+                        Watch the Demo
+                    </a>
+                </div>
+            </div>
+
+            <!-- Media Layout -->
+            <div class="relative max-w-5xl mx-auto mt-20" id="demo">
+                <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 items-center">
+                    <!-- Video Placeholder -->
+                    <div class="lg:col-span-3 relative rounded-2xl overflow-hidden glass-panel aspect-video flex items-center justify-center border border-slate-700 shadow-2xl group cursor-pointer">
+                        <div class="absolute inset-0 bg-navy-800/80 group-hover:bg-navy-800/60 transition-colors z-10"></div>
+                        <div class="w-20 h-20 rounded-full bg-teal-500/20 flex items-center justify-center z-20 group-hover:scale-110 transition-transform">
+                            <div class="w-16 h-16 rounded-full bg-teal-500 flex items-center justify-center text-navy-900 pl-1">
+                                <i class="fa-solid fa-play text-2xl"></i>
+                            </div>
+                        </div>
+                        <div class="absolute bottom-4 left-4 z-20">
+                            <span class="text-white font-medium bg-black/50 px-3 py-1 rounded-md text-sm">[Video: Trusty Demo]</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Hardware Image Placeholder -->
+                    <div class="lg:col-span-2 relative rounded-2xl overflow-hidden glass-panel aspect-square lg:aspect-[4/5] flex items-center justify-center border border-slate-700 shadow-2xl lg:-ml-12 lg:mt-12 z-20 bg-slate-800">
+                        <div class="text-center p-6">
+                            <i class="fa-solid fa-microchip text-5xl text-slate-500 mb-4"></i>
+                            <h3 class="text-white font-medium mb-2">[Image: Raspberry Pi 5 setup]</h3>
+                            <p class="text-sm text-slate-400">Trusty running locally on edge hardware.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Core Promise -->
+    <section class="py-20 bg-navy-800 border-y border-slate-800">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-teal-500/10 text-teal-400 mb-6">
+                <i class="fa-solid fa-shield-halved text-3xl"></i>
+            </div>
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Your voice stays yours.</h2>
+            <p class="text-lg text-slate-300 leading-relaxed mb-8">
+                Microphone audio <strong class="text-white">NEVER</strong> leaves your device. Only approved text tool requests (like asking for the weather) may leave, and every single action is recorded in a local, transparent privacy ledger.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 text-left mt-12">
+                <div class="p-6 rounded-xl glass-panel">
+                    <i class="fa-solid fa-microphone-lines-slash text-teal-400 text-xl mb-4"></i>
+                    <h4 class="text-white font-semibold mb-2">No Audio Uploads</h4>
+                    <p class="text-sm text-slate-400">Speech-to-text happens entirely on-device. Your raw voice is never sent to the cloud.</p>
+                </div>
+                <div class="p-6 rounded-xl glass-panel">
+                    <i class="fa-solid fa-list-check text-teal-400 text-xl mb-4"></i>
+                    <h4 class="text-white font-semibold mb-2">Approved Tools Only</h4>
+                    <p class="text-sm text-slate-400">Only specific, user-approved text requests (like fetching weather data) can access the internet.</p>
+                </div>
+                <div class="p-6 rounded-xl glass-panel">
+                    <i class="fa-solid fa-book-open text-teal-400 text-xl mb-4"></i>
+                    <h4 class="text-white font-semibold mb-2">Privacy Ledger</h4>
+                    <p class="text-sm text-slate-400">Complete transparency. Review a local log of every action and tool request Trusty makes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Trusty? (Comparisons) -->
+    <section class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Why Trusty?</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">See how Trusty compares to existing solutions in the market.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Vs Big Tech -->
+                <div class="glass-panel p-8 rounded-2xl border border-slate-700 hover:border-slate-500 transition-colors">
+                    <div class="text-red-400 mb-4">
+                        <i class="fa-solid fa-building text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">Vs. Big Tech<br><span class="text-sm font-normal text-slate-400">(Alexa, Google, Siri)</span></h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Big tech assistants send your raw voice audio to giant cloud servers to be processed and recorded. <strong class="text-white">Trusty processes all audio on-device.</strong> No cloud accounts, no subscriptions, no surveillance.
+                    </p>
+                </div>
+
+                <!-- Vs Traditional OS -->
+                <div class="glass-panel p-8 rounded-2xl border border-slate-700 hover:border-slate-500 transition-colors">
+                    <div class="text-yellow-400 mb-4">
+                        <i class="fa-solid fa-code-branch text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4">Vs. Traditional Open Source<br><span class="text-sm font-normal text-slate-400">(Rhasspy, HA Assist)</span></h3>
+                    <p class="text-slate-300 text-sm leading-relaxed">
+                        Most offline assistants match your voice against rigid, pre-trained intent templates. You have to speak exact phrases. They lack the conversational intelligence of modern AI.
+                    </p>
+                </div>
+
+                <!-- The Trusty Difference -->
+                <div class="bg-gradient-to-b from-teal-900/40 to-navy-800 p-8 rounded-2xl border border-teal-500/30 shadow-[0_0_30px_rgba(45,212,191,0.1)] relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-teal-500/10 rounded-full blur-2xl -mr-10 -mt-10"></div>
+                    <div class="text-teal-400 mb-4 relative z-10">
+                        <i class="fa-solid fa-brain text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4 relative z-10">The Trusty Difference</h3>
+                    <p class="text-slate-300 text-sm leading-relaxed relative z-10">
+                        Trusty uses <strong class="text-white">Gemma 4</strong> as the actual orchestrator. It uses reasoning to pick tools, synthesize arguments, and understand natural language. The LLM is the brain of the home, not just a chat layer.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Features Grid -->
+    <section class="py-24 bg-navy-800 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Everything you need, running locally.</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Feature 1 -->
+                <div class="p-6 rounded-2xl glass-panel hover:-translate-y-1 transition-transform duration-300 group">
+                    <div class="w-12 h-12 rounded-lg bg-slate-800 flex items-center justify-center text-teal-400 mb-6 group-hover:bg-teal-500 group-hover:text-navy-900 transition-colors">
+                        <i class="fa-solid fa-microchip text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Local Gemma 4</h3>
+                    <p class="text-sm text-slate-400">The brain and orchestrator, running efficiently via llama.cpp on your local hardware.</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="p-6 rounded-2xl glass-panel hover:-translate-y-1 transition-transform duration-300 group">
+                    <div class="w-12 h-12 rounded-lg bg-slate-800 flex items-center justify-center text-teal-400 mb-6 group-hover:bg-teal-500 group-hover:text-navy-900 transition-colors">
+                        <i class="fa-solid fa-bolt text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Lightning Fast STT & TTS</h3>
+                    <p class="text-sm text-slate-400">Powered by Moonshine ONNX and Kokoro ONNX for near-instant voice recognition and natural speech synthesis.</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="p-6 rounded-2xl glass-panel hover:-translate-y-1 transition-transform duration-300 group">
+                    <div class="w-12 h-12 rounded-lg bg-slate-800 flex items-center justify-center text-teal-400 mb-6 group-hover:bg-teal-500 group-hover:text-navy-900 transition-colors">
+                        <i class="fa-solid fa-house-signal text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Smart Home Control</h3>
+                    <p class="text-sm text-slate-400">Seamlessly controls LG webOS TVs, Roborock vacuums, and more via Home Assistant integration.</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="p-6 rounded-2xl glass-panel hover:-translate-y-1 transition-transform duration-300 group">
+                    <div class="w-12 h-12 rounded-lg bg-slate-800 flex items-center justify-center text-teal-400 mb-6 group-hover:bg-teal-500 group-hover:text-navy-900 transition-colors">
+                        <i class="fa-solid fa-memory text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Local Memory</h3>
+                    <p class="text-sm text-slate-400">Remembers names, preferences, and locations locally without ever sending your personal data away.</p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="p-6 rounded-2xl glass-panel hover:-translate-y-1 transition-transform duration-300 group">
+                    <div class="w-12 h-12 rounded-lg bg-slate-800 flex items-center justify-center text-teal-400 mb-6 group-hover:bg-teal-500 group-hover:text-navy-900 transition-colors">
+                        <i class="fa-solid fa-eye text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Eyes UI</h3>
+                    <p class="text-sm text-slate-400">A friendly, animated local web interface that gives your assistant personality and visual feedback.</p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="p-6 rounded-2xl glass-panel hover:-translate-y-1 transition-transform duration-300 group">
+                    <div class="w-12 h-12 rounded-lg bg-slate-800 flex items-center justify-center text-teal-400 mb-6 group-hover:bg-teal-500 group-hover:text-navy-900 transition-colors">
+                        <i class="fa-solid fa-wifi text-xl relative"><div class="absolute inset-0 flex items-center justify-center text-red-500 -rotate-45 text-2xl font-light">\</div></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-2">Offline Mode</h3>
+                    <p class="text-sm text-slate-400">Hard-blocks internet tools when you want absolute grid-down privacy and complete isolation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer & Contact -->
+    <footer class="bg-navy-900 pt-16 pb-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center md:items-start gap-8 mb-12">
+                <div class="text-center md:text-left">
+                    <div class="flex items-center gap-3 mb-4 justify-center md:justify-start">
+                        <div class="w-8 h-8 rounded bg-teal-500 flex items-center justify-center text-white font-bold text-xl">
+                            T
+                        </div>
+                        <span class="text-white font-bold text-xl tracking-tight">Trusty</span>
+                    </div>
+                    <p class="text-slate-400 text-sm max-w-xs">
+                        The privacy-first local voice assistant powered by reasoning.
+                    </p>
+                </div>
+                
+                <div class="text-center md:text-right">
+                    <h4 class="text-white font-semibold mb-4">Get in Touch</h4>
+                    <p class="text-slate-400 text-sm mb-4">Have questions or want to collaborate?</p>
+                    <a href="mailto:ahmad@intellinode.ai" class="text-teal-400 hover:text-teal-300 transition-colors font-medium">
+                        ahmad@intellinode.ai
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-slate-800 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p class="text-slate-500 text-sm">
+                    &copy; 2026 Trusty Open Source Project.
+                </p>
+                <div class="flex items-center gap-6">
+                    <a href="https://github.com/Barqawiz/Trusty" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white transition-colors flex items-center gap-2 text-sm">
+                        <i class="fa-brands fa-github text-lg"></i>
+                        GitHub
+                    </a>
+                    <a href="https://github.com/Barqawiz/Trusty" target="_blank" rel="noopener noreferrer" class="text-slate-400 hover:text-white transition-colors flex items-center gap-2 text-sm">
+                        <i class="fa-solid fa-book text-lg"></i>
+                        Documentation
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
