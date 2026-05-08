@@ -201,13 +201,15 @@
             <div class="relative max-w-5xl mx-auto mt-20" id="demo">
                 <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 items-center">
                     <!-- Video Placeholder -->
-                    <div class="lg:col-span-3 relative rounded-2xl overflow-hidden bg-brick-blue border-[3px] border-brick-dark shadow-brick-lg aspect-video flex items-center justify-center group cursor-pointer">
-                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.2)_1px,transparent_0)] bg-[length:24px_24px] opacity-50"></div>
+                    <div id="trusty-video" class="lg:col-span-3 relative rounded-2xl overflow-hidden bg-brick-blue border-[3px] border-brick-dark shadow-brick-lg aspect-video flex items-center justify-center group cursor-pointer" data-yt-id="wDqW9LA5JPk" onclick="playTrustyVideo(this)" role="button" tabindex="0" aria-label="Play Trusty demo video" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();playTrustyVideo(this);}">
+                        <img src="https://img.youtube.com/vi/wDqW9LA5JPk/maxresdefault.jpg" alt="Trusty demo video thumbnail" class="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-75 transition-opacity" onerror="this.onerror=null;this.src='https://img.youtube.com/vi/wDqW9LA5JPk/hqdefault.jpg';">
+                        <div class="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,rgba(255,255,255,0.2)_1px,transparent_0)] bg-[length:24px_24px] opacity-40"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-brick-dark/40 via-transparent to-transparent"></div>
                         <div class="relative z-10 flex flex-col items-center">
                             <div class="w-20 h-20 rounded-full bg-brick-yellow border-[3px] border-brick-dark flex items-center justify-center text-brick-dark group-hover:scale-110 transition-transform shadow-brick">
                                 <i class="fa-solid fa-play text-3xl pl-1"></i>
                             </div>
-                            <span class="mt-6 text-white font-bold bg-brick-dark px-3 py-1 rounded-md text-sm border-2 border-white">[ Video: Trusty Demo ]</span>
+                            <span class="mt-6 text-white font-bold bg-brick-dark px-3 py-1 rounded-md text-sm border-2 border-white">Watch the Trusty Demo</span>
                         </div>
                     </div>
                     
@@ -459,6 +461,24 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        function playTrustyVideo(el) {
+            const ytId = el.dataset.ytId;
+            if (!ytId || el.dataset.playing === 'true') return;
+            el.dataset.playing = 'true';
+            el.style.cursor = 'default';
+            el.removeAttribute('role');
+            el.removeAttribute('tabindex');
+            el.removeAttribute('aria-label');
+            el.onclick = null;
+            el.onkeydown = null;
+            const origin = encodeURIComponent(window.location.origin);
+            const src = 'https://www.youtube-nocookie.com/embed/' + ytId + '?autoplay=1&rel=0&playsinline=1&origin=' + origin;
+            el.innerHTML = '<iframe class="absolute inset-0 w-full h-full" src="' + src + '" title="Trusty demo video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>' +
+                '<a href="https://www.youtube.com/watch?v=' + ytId + '" target="_blank" rel="noopener noreferrer" class="absolute bottom-3 right-3 z-20 px-3 py-1.5 rounded-md bg-brick-dark/80 hover:bg-brick-red text-white text-xs font-bold border-2 border-white/40 backdrop-blur-sm transition-colors flex items-center gap-1.5"><i class="fa-brands fa-youtube"></i> Watch on YouTube</a>';
+        }
+    </script>
 
 </body>
 </html>
